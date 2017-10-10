@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">共享人生</string>
+    <string name="action_settings">设置</string>
+    <string name="menu_traffic">交通信息</string>
+</resources>
