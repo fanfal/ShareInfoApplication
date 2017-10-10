@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.au.shareinfoapplication.R;
+import com.au.shareinfoapplication.SIApplication;
+import com.au.shareinfoapplication.network.SIHttpUtil;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
@@ -20,6 +22,8 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -29,6 +33,9 @@ public class BaseMapFragment extends Fragment {
     private static final String LOCATION_TYPE = "bd09ll";
     @BindView(R.id.map_view)
     MapView mapView;
+
+    @Inject
+    SIHttpUtil httpUtil;
     protected BaiduMap baiduMap;
     protected LocationClient locationClient = null;
 
@@ -38,6 +45,7 @@ public class BaseMapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.base_map_layout, null);
+        SIApplication.getSiComponent().inject(this);
         ButterKnife.bind(this, view);
         initLocationClient();
         initMap();
