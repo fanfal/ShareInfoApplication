@@ -12,8 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.au.shareinfoapplication.Traffic.BaseMapFragment;
-import com.baidu.mapapi.SDKInitializer;
+import com.au.shareinfoapplication.traffic.BaseMapFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

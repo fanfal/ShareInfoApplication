@@ -1,4 +1,4 @@
-package com.au.shareinfoapplication.Traffic;
+package com.au.shareinfoapplication.traffic;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
