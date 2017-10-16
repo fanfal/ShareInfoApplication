@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.au.shareinfoapplication.BaseUI.BaseFragment;
+import com.au.shareinfoapplication.BaseUI.BasePresenter;
 import com.au.shareinfoapplication.R;
 import com.au.shareinfoapplication.SIApplication;
 import com.au.shareinfoapplication.network.SIHttpUtil;
@@ -28,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class BaseMapFragment extends Fragment {
+public class BaseMapFragment extends BaseFragment<BasePresenter> {
     public static final String TAG = "BaseMapFragment";
     private static final String LOCATION_TYPE = "bd09ll";
     @BindView(R.id.map_view)
@@ -63,6 +65,11 @@ public class BaseMapFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return new BaseMapFragmentPresenter();
     }
 
     @Override
