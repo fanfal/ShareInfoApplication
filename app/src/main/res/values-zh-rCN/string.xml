@@ -7,6 +7,7 @@
     <string name="obtain_traffic_info_button_text">获取</string>
 
     <!-- Map Fragment -->
-    <string name="share_location_card_number_text">车牌号</string>
-    <string name="share_location_card_number_hint_text">请输入车牌号...</string>
+    <string name="traffic_info_button">分享/获取</string>
+    <string name="share_location_card_number_text">车牌号:</string>
+    <string name="share_location_card_number_hint_text"><font size="12">请输入车牌号...</font></string>
 </resources>

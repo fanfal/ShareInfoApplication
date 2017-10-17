@@ -39,7 +39,7 @@ public class BaseMapFragmentPresenter extends BasePresenter {
 
     }
 
-    public void shareCareInfo(MyLocationData myLocationData) {
-        infoInteractor.shareCareInfo(myLocationData);
+    public void shareCareInfo(String carNumber, MyLocationData myLocationData) {
+        infoInteractor.shareCareInfo(carNumber, myLocationData);
     }
 }

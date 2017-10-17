@@ -12,8 +12,9 @@
     <string name="service_config_url" translatable="false">https://share-future.herokuapp.com/configuration/urls</string>
 
     <!-- Map Fragment -->
+    <string name="traffic_info_button">Share/Obtain</string>
     <string name="share_traffic_info_button_text">Share</string>
     <string name="obtain_traffic_info_button_text">Obtain</string>
-    <string name="share_location_card_number_text">Car Number</string>
-    <string name="share_location_card_number_hint_text">Please input car number...</string>
+    <string name="share_location_card_number_text">Car Number:</string>
+    <string name="share_location_card_number_hint_text"><font size="12">Please input car number...</font></string>
 </resources>

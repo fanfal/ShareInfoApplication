@@ -3,12 +3,14 @@ package com.au.shareinfoapplication.traffic;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.AppCompatEditText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.au.shareinfoapplication.BaseUI.BaseFragment;
@@ -42,11 +44,10 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     MapView mapView;
     @BindView(R.id.share_info_operation_view)
     View shareInfoOperationView;
+    @BindView(R.id.car_number_input)
+    AppCompatEditText inputEditText;
     @BindView(R.id.slide_button)
-    ImageView slideButton;
-    @BindView(R.id.hide_button)
-    ImageView hideButton;
-
+    TextView slideButton;
     @Inject
     SIHttpUtil httpUtil;
     @Inject
@@ -75,7 +76,6 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
         ButterKnife.bind(this, view);
         initLocationClient();
         initMap();
-        initView();
         return view;
     }
 
@@ -135,18 +135,19 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
 
     @OnClick(R.id.slide_button)
     public void onSlideButtonClicked() {
-        Animation animation = AnimationUtils.loadAnimation(getContext(),
-                R.anim.left_to_right_anim);
-        shareInfoOperationView.setVisibility(View.VISIBLE);
-        shareInfoOperationView.startAnimation(animation);
-    }
-
-    @OnClick(R.id.hide_button)
-    public void onHideButtonClicked() {
-        Animation animation = AnimationUtils.loadAnimation(getContext(),
-                R.anim.right_to_left_anim);
-        shareInfoOperationView.startAnimation(animation);
-        shareInfoOperationView.setVisibility(View.GONE);
+        if (shareInfoOperationView.getVisibility() == View.VISIBLE) {
+            Animation animation = AnimationUtils.loadAnimation(getContext(),
+                    R.anim.top_to_bottom_anim);
+            shareInfoOperationView.startAnimation(animation);
+            shareInfoOperationView.setVisibility(View.GONE);
+            slideButton.setSelected(false);
+        } else {
+            Animation animation = AnimationUtils.loadAnimation(getContext(),
+                    R.anim.bottom_to_top_anim);
+            shareInfoOperationView.startAnimation(animation);
+            shareInfoOperationView.setVisibility(View.VISIBLE);
+            slideButton.setSelected(true);
+        }
     }
 
     @OnClick(R.id.share_traffic_info_button)
@@ -154,31 +155,12 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
         shouldShare = true;
     }
 
-    private void initView() {
-        slideButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Animation animation = AnimationUtils.loadAnimation(getContext(),
-                        R.anim.left_to_right_anim);
-                shareInfoOperationView.setVisibility(View.VISIBLE);
-                shareInfoOperationView.startAnimation(animation);
-                slideButton.setVisibility(View.GONE);
-            }
-        });
+    @OnClick(R.id.obtain_traffic_info_button)
+    public void onObtainTrafficInfoButtonClicked() {
+        if (!getInputCarNumber().isEmpty()) {
 
-        hideButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Animation animation = AnimationUtils.loadAnimation(getContext(),
-                        R.anim.right_to_left_anim);
-                shareInfoOperationView.startAnimation(animation);
-                shareInfoOperationView.setVisibility(View.GONE);
-                slideButton.setVisibility(View.VISIBLE);
-
-            }
-        });
+        }
     }
-
 
     private class LocationListener extends BDAbstractLocationListener {
 
@@ -198,11 +180,14 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     }
 
     private void shareTrafficInfo() {
-        if (shouldShare) {
-            presenter.shareCareInfo(myLocationData);
-            shouldShare = false;
+        if (shouldShare && !getInputCarNumber().isEmpty()) {
+            presenter.shareCareInfo(getInputCarNumber(), myLocationData);
         }
+        shouldShare = false;
     }
 
+    private String getInputCarNumber() {
+        return inputEditText.getText().toString();
+    }
 
 }

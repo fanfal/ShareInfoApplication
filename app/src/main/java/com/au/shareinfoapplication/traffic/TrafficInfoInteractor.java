@@ -34,11 +34,11 @@ public class TrafficInfoInteractor {
         this.callBack = callBack;
     }
 
-    public void shareCareInfo(final MyLocationData myLocationData) {
+    public void shareCareInfo(final String carNumber, final MyLocationData myLocationData) {
         Single.fromCallable(new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
-                HttpResponse httpResponse = httpUtil.post(serviceConfig.generateShareCarInfoUrl(), JsonUtil.toJson(createShareInfo(myLocationData)));
+                HttpResponse httpResponse = httpUtil.post(serviceConfig.generateShareCarInfoUrl(), JsonUtil.toJson(createShareInfo(carNumber, myLocationData)));
                 return httpResponse.isSuccessful();
             }
         }).subscribeOn(Schedulers.io()).observeOn(mainThread()).subscribe(new SingleObserver<Boolean>() {
@@ -59,9 +59,9 @@ public class TrafficInfoInteractor {
         });
     }
 
-    private ShareInfo createShareInfo(MyLocationData myLocationData) {
+    private ShareInfo createShareInfo(String carNumber, MyLocationData myLocationData) {
         CarInfo carInfo = new CarInfo();
-        carInfo.setCarNumber("600");
+        carInfo.setCarNumber(carNumber);
         Location location = new Location();
         location.setLatitude(myLocationData.latitude);
         location.setLongitude(myLocationData.longitude);
