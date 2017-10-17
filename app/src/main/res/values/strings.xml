@@ -12,5 +12,8 @@
     <string name="service_config_url" translatable="false">https://share-future.herokuapp.com/configuration/urls</string>
 
     <!-- Map Fragment -->
-    <string name="share_location_button_text">share info</string>
+    <string name="share_traffic_info_button_text">Share</string>
+    <string name="obtain_traffic_info_button_text">Obtain</string>
+    <string name="share_location_card_number_text">Car Number</string>
+    <string name="share_location_card_number_hint_text">Please input car number...</string>
 </resources>

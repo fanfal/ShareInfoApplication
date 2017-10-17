@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.au.shareinfoapplication.BaseUI.BaseFragment;
@@ -37,6 +40,12 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     private static final String LOCATION_TYPE = "bd09ll";
     @BindView(R.id.map_view)
     MapView mapView;
+    @BindView(R.id.share_info_operation_view)
+    View shareInfoOperationView;
+    @BindView(R.id.slide_button)
+    ImageView slideButton;
+    @BindView(R.id.hide_button)
+    ImageView hideButton;
 
     @Inject
     SIHttpUtil httpUtil;
@@ -66,6 +75,7 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
         ButterKnife.bind(this, view);
         initLocationClient();
         initMap();
+        initView();
         return view;
     }
 
@@ -123,6 +133,51 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
         Toast.makeText(getContext(), "Share success", Toast.LENGTH_SHORT).show();
     }
 
+    @OnClick(R.id.slide_button)
+    public void onSlideButtonClicked() {
+        Animation animation = AnimationUtils.loadAnimation(getContext(),
+                R.anim.left_to_right_anim);
+        shareInfoOperationView.setVisibility(View.VISIBLE);
+        shareInfoOperationView.startAnimation(animation);
+    }
+
+    @OnClick(R.id.hide_button)
+    public void onHideButtonClicked() {
+        Animation animation = AnimationUtils.loadAnimation(getContext(),
+                R.anim.right_to_left_anim);
+        shareInfoOperationView.startAnimation(animation);
+        shareInfoOperationView.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.share_traffic_info_button)
+    public void onShareTrafficInfoButtonClicked() {
+        shouldShare = true;
+    }
+
+    private void initView() {
+        slideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation animation = AnimationUtils.loadAnimation(getContext(),
+                        R.anim.left_to_right_anim);
+                shareInfoOperationView.setVisibility(View.VISIBLE);
+                shareInfoOperationView.startAnimation(animation);
+                slideButton.setVisibility(View.GONE);
+            }
+        });
+
+        hideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation animation = AnimationUtils.loadAnimation(getContext(),
+                        R.anim.right_to_left_anim);
+                shareInfoOperationView.startAnimation(animation);
+                shareInfoOperationView.setVisibility(View.GONE);
+                slideButton.setVisibility(View.VISIBLE);
+
+            }
+        });
+    }
 
 
     private class LocationListener extends BDAbstractLocationListener {

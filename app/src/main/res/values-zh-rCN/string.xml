@@ -3,5 +3,10 @@
     <string name="app_name">共享人生</string>
     <string name="action_settings">设置</string>
     <string name="menu_traffic">交通信息</string>
-    <string name="share_location_button_text">分享信息</string>
+    <string name="share_traffic_info_button_text">分享</string>
+    <string name="obtain_traffic_info_button_text">获取</string>
+
+    <!-- Map Fragment -->
+    <string name="share_location_card_number_text">车牌号</string>
+    <string name="share_location_card_number_hint_text">请输入车牌号...</string>
 </resources>
