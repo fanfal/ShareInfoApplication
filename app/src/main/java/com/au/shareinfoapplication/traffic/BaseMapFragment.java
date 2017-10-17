@@ -3,16 +3,17 @@ package com.au.shareinfoapplication.traffic;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.au.shareinfoapplication.BaseUI.BaseFragment;
 import com.au.shareinfoapplication.BaseUI.BasePresenter;
 import com.au.shareinfoapplication.R;
 import com.au.shareinfoapplication.SIApplication;
 import com.au.shareinfoapplication.network.SIHttpUtil;
+import com.au.shareinfoapplication.network.ServiceConfig;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
@@ -28,9 +29,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
-public class BaseMapFragment extends BaseFragment<BasePresenter> {
+public class BaseMapFragment extends BaseFragment<BasePresenter> implements TrafficInfoInteractor.CallBack {
     public static final String TAG = "BaseMapFragment";
     private static final String LOCATION_TYPE = "bd09ll";
     @BindView(R.id.map_view)
@@ -38,16 +40,29 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> {
 
     @Inject
     SIHttpUtil httpUtil;
+    @Inject
+    ServiceConfig serviceConfig;
     protected BaiduMap baiduMap;
     protected LocationClient locationClient = null;
 
+    private MyLocationData myLocationData = null;
+
     public BDAbstractLocationListener listener = new LocationListener();
+
+    private BaseMapFragmentPresenter presenter;
+
+    private boolean shouldShare = false;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        SIApplication.getSiComponent().inject(this);
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.base_map_layout, null);
-        SIApplication.getSiComponent().inject(this);
         ButterKnife.bind(this, view);
         initLocationClient();
         initMap();
@@ -69,7 +84,10 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> {
 
     @Override
     public BasePresenter getPresenter() {
-        return new BaseMapFragmentPresenter();
+        if (presenter == null) {
+            presenter = new BaseMapFragmentPresenter(new TrafficInfoInteractor(serviceConfig, httpUtil, this));
+        }
+        return presenter;
     }
 
     @Override
@@ -100,18 +118,33 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> {
         return option;
     }
 
+    @Override
+    public void shareInfoSuccess() {
+        Toast.makeText(getContext(), "Share success", Toast.LENGTH_SHORT).show();
+    }
+
     private class LocationListener extends BDAbstractLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
-            MyLocationData locData = new MyLocationData.Builder()
+            myLocationData = new MyLocationData.Builder()
                     .accuracy(bdLocation.getRadius())
                     .direction(100).latitude(bdLocation.getLatitude())
                     .longitude(bdLocation.getLongitude()).build();
-            baiduMap.setMyLocationData(locData);
+
+            baiduMap.setMyLocationData(myLocationData);
             LatLng latLng = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
             MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
             baiduMap.animateMapStatus(mapStatusUpdate);
+            if (shouldShare) {
+                presenter.shareCareInfo(myLocationData);
+                shouldShare = false;
+            }
         }
+    }
+
+    @OnClick(R.id.share_location_button)
+    public void onShareClicked() {
+        shouldShare = true;
     }
 }

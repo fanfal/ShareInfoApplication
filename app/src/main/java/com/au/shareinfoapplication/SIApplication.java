@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.au.shareinfoapplication.dagger.DaggerSIComponent;
 import com.au.shareinfoapplication.dagger.SIComponent;
+import com.au.shareinfoapplication.dagger.SIModel;
 import com.baidu.mapapi.SDKInitializer;
 
 
@@ -18,7 +19,7 @@ public class SIApplication extends Application {
     }
 
     private void initSIComponent() {
-        siComponent = DaggerSIComponent.builder().build();
+        siComponent = DaggerSIComponent.builder().sIModel(new SIModel(this)).build();
     }
 
     public static SIComponent getSiComponent() {

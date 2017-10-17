@@ -4,9 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.au.shareinfoapplication.BaseUI.BasePresenter;
+import com.baidu.mapapi.map.MyLocationData;
 
 
 public class BaseMapFragmentPresenter extends BasePresenter {
+    private TrafficInfoInteractor infoInteractor;
+
+    public BaseMapFragmentPresenter(TrafficInfoInteractor infoInteractor) {
+        this.infoInteractor = infoInteractor;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -30,5 +37,9 @@ public class BaseMapFragmentPresenter extends BasePresenter {
     @Override
     public void onViewCreated() {
 
+    }
+
+    public void shareCareInfo(MyLocationData myLocationData) {
+        infoInteractor.shareCareInfo(myLocationData);
     }
 }
