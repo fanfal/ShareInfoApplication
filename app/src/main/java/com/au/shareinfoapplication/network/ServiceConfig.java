@@ -34,7 +34,7 @@ public class ServiceConfig {
 
 
     private void initConfig() throws IOException {
-        if (config == null) {
+        if (config == null || config.isEmpty()) {
             config = new HashMap<>();
             HttpResponse response = httpUtil.get(configUrl);
             HALBean halBean = JsonUtil.parseJson(response.getResponseString(), HALBean.class);

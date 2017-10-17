@@ -15,7 +15,10 @@
         android:id="@+id/share_location_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/share_location_button_text"
         app:layout_constraintBottom_toBottomOf="@+id/map_view"
-        app:layout_constraintLeft_toLeftOf="@+id/map_view"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

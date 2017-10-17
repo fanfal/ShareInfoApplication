@@ -123,6 +123,8 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
         Toast.makeText(getContext(), "Share success", Toast.LENGTH_SHORT).show();
     }
 
+
+
     private class LocationListener extends BDAbstractLocationListener {
 
         @Override
@@ -136,15 +138,16 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
             LatLng latLng = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
             MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
             baiduMap.animateMapStatus(mapStatusUpdate);
-            if (shouldShare) {
-                presenter.shareCareInfo(myLocationData);
-                shouldShare = false;
-            }
+            shareTrafficInfo();
         }
     }
 
-    @OnClick(R.id.share_location_button)
-    public void onShareClicked() {
-        shouldShare = true;
+    private void shareTrafficInfo() {
+        if (shouldShare) {
+            presenter.shareCareInfo(myLocationData);
+            shouldShare = false;
+        }
     }
+
+
 }
