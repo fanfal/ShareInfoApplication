@@ -147,7 +147,7 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
         }
         for (ShareInfo info :
                 shareInfos) {
-            LatLng point = new LatLng(info.getLocation().getLatitude(), info.getLocation().getLatitude());
+            LatLng point = new LatLng(info.getLocation().getLatitude(), info.getLocation().getLongitude());
             BitmapDescriptor bitmap = BitmapDescriptorFactory
                     .fromResource(R.drawable.bus_icon);
             OverlayOptions option = new MarkerOptions()
