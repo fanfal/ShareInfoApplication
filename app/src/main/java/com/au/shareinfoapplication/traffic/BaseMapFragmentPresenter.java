@@ -42,4 +42,11 @@ public class BaseMapFragmentPresenter extends BasePresenter {
     public void shareCareInfo(String carNumber, MyLocationData myLocationData) {
         infoInteractor.shareCareInfo(carNumber, myLocationData);
     }
+
+    public void queryTrafficInfoWithCarNumber(String inputCarNumber) {
+        if (!inputCarNumber.isEmpty()) {
+            infoInteractor.queryTrafficInfoWithCarNumber(inputCarNumber);
+        }
+
+    }
 }

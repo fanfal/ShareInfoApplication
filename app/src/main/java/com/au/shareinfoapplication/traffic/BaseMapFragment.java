@@ -3,7 +3,6 @@ package com.au.shareinfoapplication.traffic;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 
 import com.au.shareinfoapplication.BaseUI.BaseFragment;
 import com.au.shareinfoapplication.BaseUI.BasePresenter;
+import com.au.shareinfoapplication.Model.ShareInfo;
 import com.au.shareinfoapplication.R;
 import com.au.shareinfoapplication.SIApplication;
 import com.au.shareinfoapplication.network.SIHttpUtil;
@@ -24,11 +24,17 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -133,6 +139,20 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
         Toast.makeText(getContext(), "Share success", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void obtainTrafficInfoSuccess(ArrayList<ShareInfo> shareInfos) {
+        for (ShareInfo info :
+                shareInfos) {
+            LatLng point = new LatLng(info.getLocation().getLatitude(), info.getLocation().getLatitude());
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.tempt_marker);
+            OverlayOptions option = new MarkerOptions()
+                    .position(point)
+                    .icon(bitmap);
+            baiduMap.addOverlay(option);
+        }
+    }
+
     @OnClick(R.id.slide_button)
     public void onSlideButtonClicked() {
         if (shareInfoOperationView.getVisibility() == View.VISIBLE) {
@@ -152,14 +172,14 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
 
     @OnClick(R.id.share_traffic_info_button)
     public void onShareTrafficInfoButtonClicked() {
-        shouldShare = true;
+        if (!getInputCarNumber().isEmpty()) {
+            shouldShare = true;
+        }
     }
 
     @OnClick(R.id.obtain_traffic_info_button)
     public void onObtainTrafficInfoButtonClicked() {
-        if (!getInputCarNumber().isEmpty()) {
-
-        }
+        presenter.queryTrafficInfoWithCarNumber(getInputCarNumber());
     }
 
     private class LocationListener extends BDAbstractLocationListener {
@@ -180,7 +200,7 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     }
 
     private void shareTrafficInfo() {
-        if (shouldShare && !getInputCarNumber().isEmpty()) {
+        if (shouldShare) {
             presenter.shareCareInfo(getInputCarNumber(), myLocationData);
         }
         shouldShare = false;
