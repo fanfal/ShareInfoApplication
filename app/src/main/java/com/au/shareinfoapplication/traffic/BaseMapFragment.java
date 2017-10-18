@@ -34,7 +34,7 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -140,12 +140,16 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     }
 
     @Override
-    public void obtainTrafficInfoSuccess(ArrayList<ShareInfo> shareInfos) {
+    public void obtainTrafficInfoSuccess(List<ShareInfo> shareInfos) {
+        if (shareInfos == null || shareInfos.isEmpty()) {
+            Toast.makeText(getContext(), getString(R.string.no_traffic_info_message), Toast.LENGTH_SHORT).show();
+            return;
+        }
         for (ShareInfo info :
                 shareInfos) {
             LatLng point = new LatLng(info.getLocation().getLatitude(), info.getLocation().getLatitude());
             BitmapDescriptor bitmap = BitmapDescriptorFactory
-                    .fromResource(R.drawable.tempt_marker);
+                    .fromResource(R.drawable.bus_icon);
             OverlayOptions option = new MarkerOptions()
                     .position(point)
                     .icon(bitmap);

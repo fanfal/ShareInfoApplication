@@ -9,10 +9,10 @@ import com.au.shareinfoapplication.Model.ShareInfo;
 import com.au.shareinfoapplication.network.HttpResponse;
 import com.au.shareinfoapplication.network.SIHttpUtil;
 import com.au.shareinfoapplication.network.ServiceConfig;
+import com.au.shareinfoapplication.network.response.TrafficInfoResponse;
 import com.baidu.mapapi.map.MyLocationData;
-import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Single;
@@ -29,7 +29,7 @@ public class TrafficInfoInteractor {
     interface CallBack {
         void shareInfoSuccess();
 
-        void obtainTrafficInfoSuccess(ArrayList<ShareInfo> shareInfos);
+        void obtainTrafficInfoSuccess(List<ShareInfo> shareInfos);
     }
 
     private ServiceConfig serviceConfig;
@@ -68,25 +68,24 @@ public class TrafficInfoInteractor {
     }
 
     public void queryTrafficInfoWithCarNumber(final String inputCarNumber) {
-        Single.fromCallable(new Callable<ArrayList<ShareInfo>>() {
+        Single.fromCallable(new Callable<List<ShareInfo>>() {
             @Override
-            public ArrayList<ShareInfo> call() throws Exception {
+            public List<ShareInfo> call() throws Exception {
                 Uri uri = Uri.parse(serviceConfig.generateObtainCarInfoUrl())
                         .buildUpon()
                         .appendQueryParameter(CAR_NUMBER_QUERY_PARAMETER, inputCarNumber)
                         .build();
                 HttpResponse httpResponse = httpUtil.get(uri.toString());
-                return JsonUtil.parseJson(httpResponse.getResponseString(), new TypeToken<ArrayList<ShareInfo>>() {
-                }.getType());
+                return JsonUtil.parseJson(httpResponse.getResponseString(), TrafficInfoResponse.class).getResult();
             }
-        }).subscribeOn(Schedulers.io()).observeOn(mainThread()).subscribe(new SingleObserver<ArrayList<ShareInfo>>() {
+        }).subscribeOn(Schedulers.io()).observeOn(mainThread()).subscribe(new SingleObserver<List<ShareInfo>>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onSuccess(ArrayList<ShareInfo> shareInfos) {
+            public void onSuccess(List<ShareInfo> shareInfos) {
                 callBack.obtainTrafficInfoSuccess(shareInfos);
             }
 
