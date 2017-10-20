@@ -1,0 +1,15 @@
+Change traffic info layout animation time.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Wed Oct 18 23:33:38 2017 +0800
+#
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   app/src/main/java/com/au/shareinfoapplication/traffic/BaseMapFragment.java
+#	modified:   app/src/main/res/anim/bottom_to_top_anim.xml
+#	modified:   app/src/main/res/anim/top_to_bottom_anim.xml
+#

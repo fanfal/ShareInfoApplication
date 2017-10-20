@@ -20,4 +20,5 @@
 
     <!-- Message -->
     <string name="no_traffic_info_message">No info for the bus.</string>
+    <string name="number_of_people_in_bus">%d people</string>
 </resources>

@@ -32,8 +32,10 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -145,16 +147,7 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
             Toast.makeText(getContext(), getString(R.string.no_traffic_info_message), Toast.LENGTH_SHORT).show();
             return;
         }
-        for (ShareInfo info :
-                shareInfos) {
-            LatLng point = new LatLng(info.getLocation().getLatitude(), info.getLocation().getLongitude());
-            BitmapDescriptor bitmap = BitmapDescriptorFactory
-                    .fromResource(R.drawable.bus_icon);
-            OverlayOptions option = new MarkerOptions()
-                    .position(point)
-                    .icon(bitmap);
-            baiduMap.addOverlay(option);
-        }
+        baiduMap.addOverlays(createTrafficInfoOverlay(shareInfos));
     }
 
     @OnClick(R.id.slide_button)
@@ -212,6 +205,30 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
 
     private String getInputCarNumber() {
         return inputEditText.getText().toString();
+    }
+
+
+    @NonNull
+    private List<OverlayOptions> createTrafficInfoOverlay(List<ShareInfo> shareInfos) {
+        List<OverlayOptions> optionList = new ArrayList();
+        for (ShareInfo info :
+                shareInfos) {
+            LatLng point = new LatLng(info.getLocation().getLatitude(), info.getLocation().getLongitude());
+
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.bus_icon);
+            OverlayOptions markerOptions = new MarkerOptions()
+                    .position(point)
+                    .icon(bitmap);
+            optionList.add(markerOptions);
+
+            OverlayOptions textOption = new TextOptions()
+                    .text(getContext().getString(R.string.number_of_people_in_bus, info.getNumOfPeople()))
+                    .position(point)
+                    .fontSize(40);
+            optionList.add(textOption);
+        }
+        return optionList;
     }
 
 }
