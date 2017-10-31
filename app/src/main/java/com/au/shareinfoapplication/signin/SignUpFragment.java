@@ -15,8 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static utils.ValidateUtil.validatePassword;
-import static utils.ValidateUtil.vlidatePhoneNumber;
+import static com.au.shareinfoapplication.utils.ValidateUtil.validatePassword;
+import static com.au.shareinfoapplication.utils.ValidateUtil.vlidatePhoneNumber;
 
 public class SignUpFragment extends Fragment {
     public static final String TAG = "SignUpFragment";

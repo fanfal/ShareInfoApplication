@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import utils.JsonUtil;
+import com.au.shareinfoapplication.utils.JsonUtil;
 
 public class ServiceConfig {
     private static final String POST_SHARE_LOCATION_INFO_KEY = "postShareLocationInfo";

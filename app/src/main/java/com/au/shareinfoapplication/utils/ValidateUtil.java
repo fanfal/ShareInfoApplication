@@ -1,4 +1,4 @@
-package utils;
+package com.au.shareinfoapplication.utils;
 
 import android.util.Patterns;
 

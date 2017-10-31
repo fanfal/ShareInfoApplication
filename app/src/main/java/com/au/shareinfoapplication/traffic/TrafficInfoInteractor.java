@@ -19,7 +19,7 @@ import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import utils.JsonUtil;
+import com.au.shareinfoapplication.utils.JsonUtil;
 
 import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
 

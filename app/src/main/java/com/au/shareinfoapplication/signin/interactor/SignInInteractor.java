@@ -14,7 +14,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import utils.JsonUtil;
+import com.au.shareinfoapplication.utils.JsonUtil;
 
 public class SignInInteractor {
     private SIHttpUtil siHttpUtil;
