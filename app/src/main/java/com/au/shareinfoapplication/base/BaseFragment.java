@@ -1,4 +1,4 @@
-package com.au.shareinfoapplication.BaseUI;
+package com.au.shareinfoapplication.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -9,7 +9,7 @@
     <string name="menu_traffic">Traffic Info</string>
 
     <!-- Service Config -->
-    <string name="service_config_url" translatable="false">https://share-future.herokuapp.com/configuration/urls</string>
+    <string name="service_config_url" translatable="false">http://10.0.2.2:8080/configuration/urls</string>
 
     <!-- Map Fragment -->
     <string name="traffic_info_button">Share/Obtain</string>
@@ -21,4 +21,14 @@
     <!-- Message -->
     <string name="no_traffic_info_message">No info for the bus.</string>
     <string name="number_of_people_in_bus">%d people</string>
+
+    <!-- Authentication -->
+    <string name="sign_in_title">SignIn</string>
+    <string name="sign_up_title">SignUp</string>
+    <string name="phone_num">PhoneNumber:</string>
+    <string name="password">Password:</string>
+    <string name="sign_up_link">No account yet? Create one</string>
+    <string name="sign_in_link">Let me sign in</string>
+    <string name="phone_num_error_message">Enter a valid phone number</string>
+    <string name="password_character_error_message">Between 4 and 10 alphanumeric characters</string>
 </resources>

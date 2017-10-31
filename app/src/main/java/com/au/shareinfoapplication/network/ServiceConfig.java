@@ -1,8 +1,8 @@
 package com.au.shareinfoapplication.network;
 
 
-import com.au.shareinfoapplication.Model.HALBean;
-import com.au.shareinfoapplication.Model.Link;
+import com.au.shareinfoapplication.model.HALBean;
+import com.au.shareinfoapplication.model.Link;
 
 import java.io.IOException;
 import java.util.HashMap;

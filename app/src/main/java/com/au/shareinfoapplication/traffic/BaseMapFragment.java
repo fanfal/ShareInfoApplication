@@ -12,9 +12,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.au.shareinfoapplication.BaseUI.BaseFragment;
-import com.au.shareinfoapplication.BaseUI.BasePresenter;
-import com.au.shareinfoapplication.Model.ShareInfo;
+import com.au.shareinfoapplication.base.BaseFragment;
+import com.au.shareinfoapplication.base.BasePresenter;
+import com.au.shareinfoapplication.model.ShareInfo;
 import com.au.shareinfoapplication.R;
 import com.au.shareinfoapplication.SIApplication;
 import com.au.shareinfoapplication.network.SIHttpUtil;

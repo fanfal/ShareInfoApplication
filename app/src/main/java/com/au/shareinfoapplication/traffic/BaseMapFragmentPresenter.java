@@ -3,7 +3,7 @@ package com.au.shareinfoapplication.traffic;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.au.shareinfoapplication.BaseUI.BasePresenter;
+import com.au.shareinfoapplication.base.BasePresenter;
 import com.baidu.mapapi.map.MyLocationData;
 
 

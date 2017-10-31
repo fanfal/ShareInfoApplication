@@ -1,4 +1,4 @@
-package com.au.shareinfoapplication.Model;
+package com.au.shareinfoapplication.model;
 
 public class ShareInfo {
     private CarInfo carInfo;

@@ -3,9 +3,9 @@ package com.au.shareinfoapplication.traffic;
 
 import android.net.Uri;
 
-import com.au.shareinfoapplication.Model.CarInfo;
-import com.au.shareinfoapplication.Model.Location;
-import com.au.shareinfoapplication.Model.ShareInfo;
+import com.au.shareinfoapplication.model.CarInfo;
+import com.au.shareinfoapplication.model.Location;
+import com.au.shareinfoapplication.model.ShareInfo;
 import com.au.shareinfoapplication.network.HttpResponse;
 import com.au.shareinfoapplication.network.SIHttpUtil;
 import com.au.shareinfoapplication.network.ServiceConfig;
@@ -57,7 +57,9 @@ public class TrafficInfoInteractor {
 
             @Override
             public void onSuccess(Boolean aBoolean) {
-                callBack.shareInfoSuccess();
+                if (aBoolean) {
+                    callBack.shareInfoSuccess();
+                }
             }
 
             @Override

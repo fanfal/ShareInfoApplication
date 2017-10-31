@@ -1,5 +1,6 @@
 package com.au.shareinfoapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.au.shareinfoapplication.signin.AuthenticationActivity;
 import com.au.shareinfoapplication.traffic.BaseMapFragment;
 
 import butterknife.BindView;
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     @BindView(R.id.main_content)
     FrameLayout mainContent;
+    TextView drawerTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +98,17 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        drawerTitle = navigationView.getHeaderView(0).findViewById(R.id.drawer_title);
+        drawerTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity();
+            }
+        });
+    }
+
+    private void startActivity() {
+        startActivity(new Intent(this, AuthenticationActivity.class));
     }
 
     private void replaceFragment(Fragment fragment) {

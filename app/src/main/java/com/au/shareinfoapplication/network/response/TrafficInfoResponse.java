@@ -1,7 +1,7 @@
 package com.au.shareinfoapplication.network.response;
 
 
-import com.au.shareinfoapplication.Model.ShareInfo;
+import com.au.shareinfoapplication.model.ShareInfo;
 
 import java.util.List;
 

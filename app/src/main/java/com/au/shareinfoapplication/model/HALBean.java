@@ -1,4 +1,4 @@
-package com.au.shareinfoapplication.Model;
+package com.au.shareinfoapplication.model;
 
 
 import com.google.gson.annotations.SerializedName;

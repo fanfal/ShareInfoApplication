@@ -14,4 +14,14 @@
     <!-- Message -->
     <string name="no_traffic_info_message">没有该公交车信息。</string>
     <string name="number_of_people_in_bus">%d 人</string>
+
+    <!-- Authentication -->
+    <string name="sign_in_title">登录</string>
+    <string name="sign_up_title">注册</string>
+    <string name="phone_num">电话号码:</string>
+    <string name="password">密码:</string>
+    <string name="sign_up_link">还没有账号么？创建一个</string>
+    <string name="sign_in_link">让我去登录</string>
+    <string name="phone_num_error_message">请输入正确电话号码</string>
+    <string name="password_character_error_message">密码需要在4到8位之间</string>
 </resources>
