@@ -8,6 +8,12 @@
 
     <string name="menu_traffic">Traffic Info</string>
 
+    <string name="error_title">Error</string>
+    <string name="failed_title">Failed</string>
+    <string name="success_title">Success</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+
     <!-- Service Config -->
     <string name="service_config_url" translatable="false">http://10.0.2.2:8080/configuration/urls</string>
 
@@ -31,4 +37,7 @@
     <string name="sign_in_link">Let me sign in</string>
     <string name="phone_num_error_message">Enter a valid phone number</string>
     <string name="password_character_error_message">Between 4 and 10 alphanumeric characters</string>
+    <string name="sign_in_error_message">Sign in error. Unknown issue happened.</string>
+    <string name="sign_in_failed_message">Sign in failed.  phone number or password error.</string>
+
 </resources>

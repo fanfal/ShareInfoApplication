@@ -11,8 +11,11 @@ import java.util.Map;
 import utils.JsonUtil;
 
 public class ServiceConfig {
-    private static final String POST_SHARE_LOCATION_INFO_KEY = "post_share_location_info";
-    private static final String GET_OBTAIN_LOCATION_INFO = "get_obtain_location_info";
+    private static final String POST_SHARE_LOCATION_INFO_KEY = "postShareLocationInfo";
+    private static final String GET_OBTAIN_LOCATION_INFO = "getObtainLocationInfo";
+    private static final String USER_SIGNIN = "userLogin";
+    private static final String USER_SIGNUP = "userRegister";
+    private static final String USER_REFRESH_TOKEN = "refreshToken";
     private SIHttpUtil httpUtil;
     private String configUrl;
     private Map<String, String> config;
@@ -30,6 +33,21 @@ public class ServiceConfig {
     public String generateObtainCarInfoUrl() throws IOException {
         initConfig();
         return config.get(GET_OBTAIN_LOCATION_INFO);
+    }
+
+    public String generateSignInUrl() throws IOException {
+        initConfig();
+        return config.get(USER_SIGNIN);
+    }
+
+    public String generateSignUpUrl() throws IOException {
+        initConfig();
+        return config.get(USER_SIGNUP);
+    }
+
+    public String generateRefreshTokenUrl() throws IOException {
+        initConfig();
+        return config.get(USER_REFRESH_TOKEN);
     }
 
 

@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.au.shareinfoapplication.R;
+import com.au.shareinfoapplication.signin.contract.SignInView;
+import com.au.shareinfoapplication.widget.SIDialogFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,12 +21,14 @@ import static utils.ValidateUtil.validatePassword;
 import static utils.ValidateUtil.vlidatePhoneNumber;
 
 
-public class SignInFragment extends Fragment {
+public class SignInFragment extends Fragment implements SignInView {
     public static final String TAG = "SignInFragment";
     @BindView(R.id.input_phone_num)
     EditText inputPhoneNum;
     @BindView(R.id.input_password)
     EditText inputPassword;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -64,4 +69,37 @@ public class SignInFragment extends Fragment {
 
     }
 
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void signInError() {
+        SIDialogFragment.Builder builder = new SIDialogFragment.Builder(getActivity());
+        builder.setTitle(R.string.error_title)
+                .setMessage(R.string.sign_in_error_message)
+                .setPositiveButton(R.string.close, null)
+                .show(getFragmentManager());
+
+    }
+
+    @Override
+    public void signInFailed() {
+        SIDialogFragment.Builder builder = new SIDialogFragment.Builder(getActivity());
+        builder.setTitle(R.string.failed_title)
+                .setMessage(R.string.sign_in_failed_message)
+                .setPositiveButton(R.string.close, null)
+                .show(getFragmentManager());
+    }
+
+    @Override
+    public void signInSuccess(String token) {
+
+    }
 }
