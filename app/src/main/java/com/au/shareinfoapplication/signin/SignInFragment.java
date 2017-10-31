@@ -10,8 +10,16 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.au.shareinfoapplication.R;
+import com.au.shareinfoapplication.SIApplication;
+import com.au.shareinfoapplication.account.SIAccountManager;
+import com.au.shareinfoapplication.account.model.SIAccount;
+import com.au.shareinfoapplication.network.SIHttpUtil;
+import com.au.shareinfoapplication.network.ServiceConfig;
 import com.au.shareinfoapplication.signin.contract.SignInView;
+import com.au.shareinfoapplication.signin.interactor.SignInInteractor;
 import com.au.shareinfoapplication.widget.SIDialogFragment;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,12 +37,21 @@ public class SignInFragment extends Fragment implements SignInView {
     EditText inputPassword;
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+    @Inject
+    SIAccountManager siAccountManager;
+    @Inject
+    SIHttpUtil siHttpUtil;
+    @Inject
+    ServiceConfig serviceConfig;
+    private SignInInteractor signInInteractor;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sign_in_fragment_layout, null);
         ButterKnife.bind(this, view);
+        SIApplication.getSiComponent().inject(this);
+        signInInteractor = new SignInInteractor(siHttpUtil, serviceConfig, this);
         return view;
     }
 
@@ -45,7 +62,9 @@ public class SignInFragment extends Fragment implements SignInView {
 
     @OnClick(R.id.btn_login)
     public void onLoginClicked() {
-        validate();
+        if (validate()) {
+            signInInteractor.signIn(inputPhoneNum.getText().toString(), inputPassword.getText().toString());
+        }
     }
 
     public boolean validate() {
@@ -81,8 +100,8 @@ public class SignInFragment extends Fragment implements SignInView {
 
     @Override
     public void signInError() {
-        SIDialogFragment.Builder builder = new SIDialogFragment.Builder(getActivity());
-        builder.setTitle(R.string.error_title)
+        new SIDialogFragment.Builder(getContext())
+                .setTitle(R.string.error_title)
                 .setMessage(R.string.sign_in_error_message)
                 .setPositiveButton(R.string.close, null)
                 .show(getFragmentManager());
@@ -91,15 +110,16 @@ public class SignInFragment extends Fragment implements SignInView {
 
     @Override
     public void signInFailed() {
-        SIDialogFragment.Builder builder = new SIDialogFragment.Builder(getActivity());
-        builder.setTitle(R.string.failed_title)
+        new SIDialogFragment.Builder(getContext())
+                .setTitle(R.string.failed_title)
                 .setMessage(R.string.sign_in_failed_message)
                 .setPositiveButton(R.string.close, null)
                 .show(getFragmentManager());
     }
 
     @Override
-    public void signInSuccess(String token) {
-
+    public void signInSuccess(SIAccount account) {
+        siAccountManager.addUserAccount(account);
+        getActivity().finish();
     }
 }

@@ -30,6 +30,34 @@ android {
         }
     }
 
+    productFlavors {
+        internal {
+            applicationId 'com.au.shareinfoapplication.internal'
+            def account_type = applicationId + '.account'
+            def account_token = applicationId + '.token'
+
+            resValue 'string', 'account_type', account_type
+            buildConfigField 'String', 'ACCOUNT_TYPE', "\"${account_type}\""
+            buildConfigField 'String', 'ACCOUNT_TOKEN', "\"${account_token}\""
+
+
+        }
+
+        production {
+            applicationId 'com.au.shareinfoapplication.production'
+
+            def account_type = applicationId + '.account'
+            def account_token = applicationId + '.token'
+
+            resValue 'string', 'account_type', account_type
+            buildConfigField 'String', 'ACCOUNT_TYPE', "\"${account_type}\""
+            buildConfigField 'String', 'ACCOUNT_TOKEN', "\"${account_token}\""
+
+        }
+
+    }
+    flavorDimensions "default"
+
 }
 
 dependencies {

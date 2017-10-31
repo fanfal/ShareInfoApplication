@@ -7,4 +7,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="button_12dp_padding">12dp</dimen>
     <dimen name="button_8dp_padding">8dp</dimen>
+
+    <dimen name="progress_bar_size">48dp</dimen>
 </resources>

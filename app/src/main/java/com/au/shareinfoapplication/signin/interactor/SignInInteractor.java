@@ -1,11 +1,14 @@
 package com.au.shareinfoapplication.signin.interactor;
 
 
+import com.au.shareinfoapplication.account.model.SIAccount;
 import com.au.shareinfoapplication.network.HttpResponse;
 import com.au.shareinfoapplication.network.SIHttpUtil;
 import com.au.shareinfoapplication.network.ServiceConfig;
 import com.au.shareinfoapplication.signin.contract.SignInView;
+import com.au.shareinfoapplication.signin.model.SignInRequest;
 import com.au.shareinfoapplication.signin.model.SignInResponse;
+import com.au.shareinfoapplication.utils.JsonUtil;
 
 import java.util.concurrent.Callable;
 
@@ -14,7 +17,6 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import com.au.shareinfoapplication.utils.JsonUtil;
 
 public class SignInInteractor {
     private SIHttpUtil siHttpUtil;
@@ -27,13 +29,15 @@ public class SignInInteractor {
         this.signInView = signInView;
     }
 
-    public void signIn(String phoneNum, String password) {
+    public void signIn(final String phoneNum, final String password) {
         signInView.showProgressBar();
         Single.fromCallable(new Callable<HttpResponse>() {
             @Override
             public HttpResponse call() throws Exception {
-                return siHttpUtil.get(serviceConfig.generateSignInUrl());
-
+                SignInRequest signInRequest = new SignInRequest();
+                signInRequest.setPhoneNum(phoneNum);
+                signInRequest.setPassword(password);
+                return siHttpUtil.post(serviceConfig.generateSignInUrl(), JsonUtil.toJson(signInRequest));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<HttpResponse>() {
             @Override
@@ -46,7 +50,12 @@ public class SignInInteractor {
                 signInView.hideProgressBar();
                 if (httpResponse.isSuccessful()) {
                     String token = JsonUtil.parseJson(httpResponse.getResponseString(), SignInResponse.class).getToken();
-                    signInView.signInSuccess(token);
+                    SIAccount siAccount = new SIAccount.Builder()
+                            .setPassWord(password)
+                            .setPhoneNum(phoneNum)
+                            .setToken(token)
+                            .build();
+                    signInView.signInSuccess(siAccount);
                 } else {
                     signInView.signInFailed();
                 }

@@ -15,8 +15,11 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.au.shareinfoapplication.account.SIAccountManager;
 import com.au.shareinfoapplication.signin.AuthenticationActivity;
 import com.au.shareinfoapplication.traffic.BaseMapFragment;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     @BindView(R.id.main_content)
     FrameLayout mainContent;
+    @Inject
+    SIAccountManager siAccountManager;
     TextView drawerTitle;
 
     @Override
@@ -38,10 +43,16 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        SIApplication.getSiComponent().inject(this);
         initView();
         replaceFragment(new BaseMapFragment());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initDrawerTitle();
+    }
 
     @Override
     public void onBackPressed() {
@@ -99,12 +110,22 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         drawerTitle = navigationView.getHeaderView(0).findViewById(R.id.drawer_title);
-        drawerTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity();
-            }
-        });
+        initDrawerTitle();
+    }
+
+    private void initDrawerTitle() {
+        if (siAccountManager.isUserLogin()) {
+            drawerTitle.setText(siAccountManager.getUserPhoneNum());
+            drawerTitle.setOnClickListener(null);
+        } else {
+            drawerTitle.setText(R.string.sign_in_title);
+            drawerTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity();
+                }
+            });
+        }
     }
 
     private void startActivity() {

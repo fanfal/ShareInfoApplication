@@ -1,5 +1,6 @@
 package com.au.shareinfoapplication.dagger;
 
+import android.accounts.AccountManager;
 import android.content.Context;
 
 import com.au.shareinfoapplication.R;
@@ -37,5 +38,9 @@ public class SIModel {
         return new ServiceConfig(httpUtil, context.getString(R.string.service_config_url));
     }
 
+    @Provides
+    public AccountManager provideAccountManager() {
+        return (AccountManager) context.getSystemService(Context.ACCOUNT_SERVICE);
+    }
 
 }

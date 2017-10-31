@@ -1,6 +1,6 @@
 package com.au.shareinfoapplication.signin.model;
 
 
-public class SignInResponse extends BaseAuthResponse {
+public class SignUpResponse extends BaseAuthResponse {
 
 }

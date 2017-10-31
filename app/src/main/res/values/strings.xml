@@ -38,6 +38,8 @@
     <string name="phone_num_error_message">Enter a valid phone number</string>
     <string name="password_character_error_message">Between 4 and 10 alphanumeric characters</string>
     <string name="sign_in_error_message">Sign in error. Unknown issue happened.</string>
-    <string name="sign_in_failed_message">Sign in failed.  phone number or password error.</string>
+    <string name="sign_in_failed_message">Sign in failed. Phone number or password error.</string>
+    <string name="sign_up_error_message">Sign up error. Unknown issue happened.</string>
+    <string name="sign_up_failed_message">Sign up failed. User already exist.</string>
 
 </resources>
