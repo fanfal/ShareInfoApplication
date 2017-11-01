@@ -9,7 +9,7 @@ import com.au.shareinfoapplication.model.ShareInfo;
 import com.au.shareinfoapplication.network.HttpResponse;
 import com.au.shareinfoapplication.network.SIHttpUtil;
 import com.au.shareinfoapplication.network.ServiceConfig;
-import com.au.shareinfoapplication.network.response.TrafficInfoResponse;
+import com.au.shareinfoapplication.traffic.model.TrafficInfoResponse;
 import com.baidu.mapapi.map.MyLocationData;
 
 import java.util.List;

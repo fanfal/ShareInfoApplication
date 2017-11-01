@@ -1,4 +1,4 @@
-package com.au.shareinfoapplication.network.response;
+package com.au.shareinfoapplication.traffic.model;
 
 
 import com.au.shareinfoapplication.model.ShareInfo;
