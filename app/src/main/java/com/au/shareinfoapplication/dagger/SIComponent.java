@@ -2,6 +2,7 @@ package com.au.shareinfoapplication.dagger;
 
 
 import com.au.shareinfoapplication.MainActivity;
+import com.au.shareinfoapplication.me.MeFragment;
 import com.au.shareinfoapplication.signin.SignInFragment;
 import com.au.shareinfoapplication.signin.SignUpFragment;
 import com.au.shareinfoapplication.traffic.BaseMapFragment;
@@ -21,4 +22,6 @@ public interface SIComponent {
     void inject(MainActivity mainActivity);
 
     void inject(SignUpFragment signUpFragment);
+
+    void inject(MeFragment meFragment);
 }

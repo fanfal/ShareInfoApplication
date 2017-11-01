@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.au.shareinfoapplication.account.SIAccountManager;
+import com.au.shareinfoapplication.me.MeFragment;
 import com.au.shareinfoapplication.signin.AuthenticationActivity;
 import com.au.shareinfoapplication.traffic.BaseMapFragment;
 import com.au.shareinfoapplication.widget.SIDialogFragment;
@@ -86,8 +87,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.traffic_info) {
+            replaceFragment(new BaseMapFragment());
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_me) {
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity
         initDrawerTitle();
     }
 
-    private void initDrawerTitle() {
+    public void initDrawerTitle() {
         if (siAccountManager.isUserLogin()) {
             drawerTitle.setText(siAccountManager.getUserPhoneNum());
             drawerTitle.setOnClickListener(null);
@@ -146,6 +147,8 @@ public class MainActivity extends AppCompatActivity
                     .setMessage(R.string.user_not_sign_in)
                     .setPositiveButton(R.string.close, null)
                     .show(getSupportFragmentManager());
+        } else {
+            replaceFragment(new MeFragment());
         }
     }
 }

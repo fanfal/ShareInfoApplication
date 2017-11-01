@@ -36,6 +36,15 @@ public class SIAccountManager {
         return accountManager.peekAuthToken(getLoginAccount(), BuildConfig.ACCOUNT_TYPE);
     }
 
+    public Boolean removeAccount() {
+        Account account = getLoginAccount();
+        if (account != null) {
+            accountManager.removeAccount(account, null, null);
+            return true;
+        }
+        return false;
+    }
+
     private Account getLoginAccount() {
         for (Account account : accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE)) {
             if (account != null) {

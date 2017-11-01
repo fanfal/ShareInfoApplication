@@ -43,6 +43,8 @@
     <string name="sign_in_failed_message">Sign in failed. Phone number or password error.</string>
     <string name="sign_up_error_message">Sign up error. Unknown issue happened.</string>
     <string name="sign_up_failed_message">Sign up failed. User already exist.</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="my_account">My Account</string>
 
 
     <!-- Me Tab -->
