@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.au.shareinfoapplication.account.SIAccountManager;
 import com.au.shareinfoapplication.signin.AuthenticationActivity;
 import com.au.shareinfoapplication.traffic.BaseMapFragment;
+import com.au.shareinfoapplication.widget.SIDialogFragment;
 
 import javax.inject.Inject;
 
@@ -89,8 +90,8 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.nav_me) {
+            onNavMeTabClicked();
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -137,5 +138,14 @@ public class MainActivity extends AppCompatActivity
                 .beginTransaction()
                 .replace(R.id.main_content, fragment)
                 .commitNowAllowingStateLoss();
+    }
+
+    private void onNavMeTabClicked() {
+        if (!siAccountManager.isUserLogin()) {
+            new SIDialogFragment.Builder(this)
+                    .setMessage(R.string.user_not_sign_in)
+                    .setPositiveButton(R.string.close, null)
+                    .show(getSupportFragmentManager());
+        }
     }
 }

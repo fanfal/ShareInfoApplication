@@ -13,6 +13,7 @@
     <string name="success_title">Success</string>
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
+    <string name="ok">OK</string>
 
     <!-- Service Config -->
     <string name="service_config_url" translatable="false">http://10.0.2.2:8080/configuration/urls</string>
@@ -27,6 +28,7 @@
     <!-- Message -->
     <string name="no_traffic_info_message">No info for the bus.</string>
     <string name="number_of_people_in_bus">%d people</string>
+    <string name="user_not_sign_in">Please sign in you account first.</string>
 
     <!-- Authentication -->
     <string name="sign_in_title">SignIn</string>
@@ -41,5 +43,9 @@
     <string name="sign_in_failed_message">Sign in failed. Phone number or password error.</string>
     <string name="sign_up_error_message">Sign up error. Unknown issue happened.</string>
     <string name="sign_up_failed_message">Sign up failed. User already exist.</string>
+
+
+    <!-- Me Tab -->
+    <string name="me_title">Me</string>
 
 </resources>
