@@ -6,6 +6,7 @@ import android.content.Context;
 import com.au.shareinfoapplication.R;
 import com.au.shareinfoapplication.network.SIHttpUtil;
 import com.au.shareinfoapplication.network.ServiceConfig;
+import com.au.shareinfoapplication.utils.PreUtil;
 
 import javax.inject.Singleton;
 
@@ -41,6 +42,12 @@ public class SIModel {
     @Provides
     public AccountManager provideAccountManager() {
         return (AccountManager) context.getSystemService(Context.ACCOUNT_SERVICE);
+    }
+
+    @Singleton
+    @Provides
+    public PreUtil providePreUtil() {
+        return new PreUtil(context);
     }
 
 }

@@ -13,7 +13,6 @@
     <string name="ok">好的</string>
 
 
-
     <!-- Map Fragment -->
     <string name="traffic_info_button">分享/获取</string>
     <string name="share_location_card_number_text">车牌号:</string>
@@ -42,4 +41,7 @@
 
     <!-- Me Tab -->
     <string name="me_title">我</string>
+    <!-- Traffic Info -->
+    <string name="button_boarding">上车</string>
+    <string name="button_get_off">下车</string>
 </resources>

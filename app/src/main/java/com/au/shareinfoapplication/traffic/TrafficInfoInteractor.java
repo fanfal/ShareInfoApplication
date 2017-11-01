@@ -10,6 +10,7 @@ import com.au.shareinfoapplication.network.HttpResponse;
 import com.au.shareinfoapplication.network.SIHttpUtil;
 import com.au.shareinfoapplication.network.ServiceConfig;
 import com.au.shareinfoapplication.traffic.model.TrafficInfoResponse;
+import com.au.shareinfoapplication.utils.JsonUtil;
 import com.baidu.mapapi.map.MyLocationData;
 
 import java.util.List;
@@ -19,7 +20,6 @@ import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import com.au.shareinfoapplication.utils.JsonUtil;
 
 import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
 
@@ -42,7 +42,7 @@ public class TrafficInfoInteractor {
         this.callBack = callBack;
     }
 
-    public void shareCareInfo(final String carNumber, final MyLocationData myLocationData) {
+    public void shareCarInfo(final String carNumber, final MyLocationData myLocationData) {
         Single.fromCallable(new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
@@ -96,6 +96,9 @@ public class TrafficInfoInteractor {
 
             }
         });
+    }
+
+    public void removeCarInfo(String sharedBusMessageUuid) {
     }
 
 

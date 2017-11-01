@@ -5,8 +5,8 @@
     android:id="@+id/share_info_operation_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/round_corner"
     android:layout_marginBottom="12dp"
+    android:background="@drawable/round_corner"
     android:visibility="gone">
 
     <TextView
@@ -26,33 +26,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/share_location_card_number_hint_text"
-        android:singleLine="true"
         android:paddingEnd="12dp"
+        android:singleLine="true"
         app:layout_constraintLeft_toRightOf="@id/card_number_text" />
 
-    <Button
-        android:id="@+id/share_traffic_info_button"
+    <TextView
+        android:id="@+id/boarding_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@drawable/grey_button_drawable"
-        android:layout_marginBottom="@dimen/button_8dp_padding"
-        android:text="@string/share_traffic_info_button_text"
+        android:padding="@dimen/button_12dp_padding"
+        android:text="@string/button_boarding"
         android:textColor="@android:color/white"
-        app:layout_constraintBaseline_toBaselineOf="@id/obtain_traffic_info_button"
-        app:layout_constraintEnd_toStartOf="@+id/obtain_traffic_info_button"
-        app:layout_constraintLeft_toRightOf="@+id/obtain_traffic_info_button"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/obtain_button"
+        app:layout_constraintTop_toBottomOf="@+id/car_number_input"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
-        android:id="@+id/obtain_traffic_info_button"
+    <TextView
+        android:id="@+id/obtain_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/grey_button_drawable"
-        android:layout_marginBottom="@dimen/button_8dp_padding"
+        android:padding="@dimen/button_12dp_padding"
         android:text="@string/obtain_traffic_info_button_text"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/car_number_input"
-        app:layout_constraintTop_toBottomOf="@id/car_number_input" />
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toRightOf="@+id/boarding_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car_number_input"
+        app:layout_constraintVertical_chainStyle="packed" />
 
 </android.support.constraint.ConstraintLayout>

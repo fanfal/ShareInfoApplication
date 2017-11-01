@@ -4,7 +4,7 @@ import android.util.Patterns;
 
 
 public class ValidateUtil {
-    public static boolean vlidatePhoneNumber(String phoneNumber) {
+    public static boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber.isEmpty() || !Patterns.PHONE.matcher(phoneNumber).matches()) {
             return false;
         }

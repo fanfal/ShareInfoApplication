@@ -50,4 +50,9 @@
     <!-- Me Tab -->
     <string name="me_title">Me</string>
 
+    <!-- Traffic Info -->
+    <string name="button_boarding">Boarding</string>
+    <string name="button_get_off">Get Off</string>
+
+
 </resources>

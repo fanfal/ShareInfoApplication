@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.au.shareinfoapplication.utils.ValidateUtil.validatePassword;
-import static com.au.shareinfoapplication.utils.ValidateUtil.vlidatePhoneNumber;
+import static com.au.shareinfoapplication.utils.ValidateUtil.validatePhoneNumber;
 
 public class SignUpFragment extends Fragment implements SignUpView {
     public static final String TAG = "SignUpFragment";
@@ -71,7 +71,7 @@ public class SignUpFragment extends Fragment implements SignUpView {
         String num = inputPhoneNum.getText().toString();
         String password = inputPassword.getText().toString();
 
-        if (vlidatePhoneNumber(num)) {
+        if (validatePhoneNumber(num)) {
             inputPhoneNum.setError(null);
         } else {
             inputPhoneNum.setError(getString(R.string.phone_num_error_message));
