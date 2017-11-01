@@ -119,7 +119,7 @@ public class SignInFragment extends Fragment implements SignInView {
 
     @Override
     public void signInSuccess(SIAccount account) {
-        siAccountManager.addUserAccount(account);
+        siAccountManager.addUserAccountExplicitly(account);
         getActivity().finish();
     }
 }

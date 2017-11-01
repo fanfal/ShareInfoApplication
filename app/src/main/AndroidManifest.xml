@@ -70,7 +70,7 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <service android:name="com.example.accounts.GenericAccountService">
+        <service android:name=".account.model.AccountService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>

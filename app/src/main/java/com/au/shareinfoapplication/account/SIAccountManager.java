@@ -21,7 +21,8 @@ public class SIAccountManager {
         return getLoginAccount() != null;
     }
 
-    public void addUserAccount(SIAccount siAccount) {
+    //Only Implement Add Account Explicitly, if need Account account , please get the response sign in Activity and return the result
+    public void addUserAccountExplicitly(SIAccount siAccount) {
         Account account = new Account(siAccount.getPhoneNum(), BuildConfig.ACCOUNT_TYPE);
         accountManager.addAccountExplicitly(account, siAccount.getPassword(), null);
         accountManager.setAuthToken(account, BuildConfig.ACCOUNT_TOKEN, siAccount.getToken());

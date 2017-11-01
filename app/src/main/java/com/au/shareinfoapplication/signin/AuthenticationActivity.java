@@ -12,6 +12,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AuthenticationActivity extends AppCompatActivity {
+    public static final String ARG_ACCOUNT_TYPE = "arg_account_type";
+    public static final String ARG_AUTH_TYPE = "arg_auth_type";
+    public static final String ARG_IS_ADDING_NEW_ACCOUNT = "arg_is_adding_new_account";
+
     @BindView(R.id.authentication_toolbar)
     Toolbar toolbar;
 

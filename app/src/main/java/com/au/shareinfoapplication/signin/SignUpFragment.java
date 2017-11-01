@@ -119,7 +119,7 @@ public class SignUpFragment extends Fragment implements SignUpView {
 
     @Override
     public void signUpSuccess(SIAccount account) {
-        siAccountManager.addUserAccount(account);
+        siAccountManager.addUserAccountExplicitly(account);
         getActivity().finish();
     }
 }
