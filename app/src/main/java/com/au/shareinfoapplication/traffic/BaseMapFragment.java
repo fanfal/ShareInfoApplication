@@ -14,13 +14,16 @@ import android.widget.Toast;
 
 import com.au.shareinfoapplication.R;
 import com.au.shareinfoapplication.SIApplication;
+import com.au.shareinfoapplication.account.SIAccountManager;
 import com.au.shareinfoapplication.base.BaseFragment;
 import com.au.shareinfoapplication.base.BasePresenter;
 import com.au.shareinfoapplication.model.ShareInfo;
 import com.au.shareinfoapplication.network.SIHttpUtil;
 import com.au.shareinfoapplication.network.ServiceConfig;
 import com.au.shareinfoapplication.traffic.contract.BaseMapFragmentView;
+import com.au.shareinfoapplication.traffic.model.ShareBusInfoResponse;
 import com.au.shareinfoapplication.utils.PreUtil;
+import com.au.shareinfoapplication.widget.SIDialogFragment;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
@@ -66,6 +69,8 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     ServiceConfig serviceConfig;
     @Inject
     PreUtil preUtil;
+    @Inject
+    SIAccountManager siAccountManager;
 
     protected BaiduMap baiduMap;
     protected LocationClient locationClient = null;
@@ -112,7 +117,7 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     @Override
     public BasePresenter getPresenter() {
         if (presenter == null) {
-            presenter = new BaseMapFragmentPresenter(new TrafficInfoInteractor(serviceConfig, httpUtil, this), preUtil, this);
+            presenter = new BaseMapFragmentPresenter(new TrafficInfoInteractor(serviceConfig, httpUtil, this), preUtil, this, siAccountManager);
         }
         return presenter;
     }
@@ -140,9 +145,10 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
         getOffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.removeSharedCarInfo();
+                presenter.removeSharedBusInfo();
             }
         });
+        getOffButton.setSelected(true);
 
         operateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +169,9 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     }
 
     @Override
-    public void shareInfoSuccess() {
+    public void shareInfoSuccess(ShareBusInfoResponse response) {
+        preUtil.setShareBusMessageUuid(response.getUuid());
+        presenter.updateButton();
         Toast.makeText(getContext(), "Share success", Toast.LENGTH_SHORT).show();
     }
 
@@ -174,6 +182,13 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
             return;
         }
         baiduMap.addOverlays(createTrafficInfoOverlay(shareInfos));
+    }
+
+    @Override
+    public void removeShareBusInfoSuccess() {
+        Toast.makeText(getActivity(), "removeShareBusInfoSuccess", Toast.LENGTH_LONG).show();
+        preUtil.setShareBusMessageUuid(null);
+        presenter.updateButton();
     }
 
 
@@ -222,6 +237,16 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     public void showShareInfoButton() {
         getOffButton.setVisibility(View.GONE);
         operateButton.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void showUserShouldLoginAlertDialog() {
+        new SIDialogFragment.Builder(getActivity())
+                .setTitle(R.string.error_title)
+                .setMessage(R.string.sign_in_alert)
+                .setPositiveButton(R.string.close, null)
+                .show(getActivity().getSupportFragmentManager());
     }
 
     private class LocationListener extends BDAbstractLocationListener {
@@ -243,7 +268,7 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
 
     private void shareTrafficInfo() {
         if (shouldShare) {
-            presenter.shareCarInfo(getInputCarNumber(), myLocationData);
+            presenter.shareBusInfo(getInputCarNumber(), myLocationData);
         }
         shouldShare = false;
     }

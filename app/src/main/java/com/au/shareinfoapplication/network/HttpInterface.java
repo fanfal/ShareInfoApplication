@@ -17,4 +17,6 @@ public interface HttpInterface {
     HttpResponse put(String url, String data) throws IOException;
 
     HttpResponse delete(String url) throws IOException;
+
+    HttpResponse post(String url, String data, Map<String, String> customHeaderItems) throws IOException;
 }

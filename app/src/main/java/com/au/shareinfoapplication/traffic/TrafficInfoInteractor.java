@@ -9,6 +9,7 @@ import com.au.shareinfoapplication.model.ShareInfo;
 import com.au.shareinfoapplication.network.HttpResponse;
 import com.au.shareinfoapplication.network.SIHttpUtil;
 import com.au.shareinfoapplication.network.ServiceConfig;
+import com.au.shareinfoapplication.traffic.model.ShareBusInfoResponse;
 import com.au.shareinfoapplication.traffic.model.TrafficInfoResponse;
 import com.au.shareinfoapplication.utils.JsonUtil;
 import com.baidu.mapapi.map.MyLocationData;
@@ -24,12 +25,15 @@ import io.reactivex.schedulers.Schedulers;
 import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
 
 public class TrafficInfoInteractor {
-    final String CAR_NUMBER_QUERY_PARAMETER = "carNumber";
+    private final String CAR_NUMBER_QUERY_PARAMETER = "carNumber";
+    private final String UUID = "uuid";
 
     interface CallBack {
-        void shareInfoSuccess();
+        void shareInfoSuccess(ShareBusInfoResponse response);
 
         void obtainTrafficInfoSuccess(List<ShareInfo> shareInfos);
+
+        void removeShareBusInfoSuccess();
     }
 
     private ServiceConfig serviceConfig;
@@ -42,24 +46,24 @@ public class TrafficInfoInteractor {
         this.callBack = callBack;
     }
 
-    public void shareCarInfo(final String carNumber, final MyLocationData myLocationData) {
-        Single.fromCallable(new Callable<Boolean>() {
+    public void shareBusInfo(final String busNumber, final MyLocationData myLocationData) {
+        Single.fromCallable(new Callable<ShareBusInfoResponse>() {
             @Override
-            public Boolean call() throws Exception {
-                HttpResponse httpResponse = httpUtil.post(serviceConfig.generateShareCarInfoUrl(), JsonUtil.toJson(createShareInfo(carNumber, myLocationData)));
-                return httpResponse.isSuccessful();
+            public ShareBusInfoResponse call() throws Exception {
+                HttpResponse httpResponse = httpUtil.post(serviceConfig.generateShareBusInfoUrl(),
+                        JsonUtil.toJson(createShareInfo(busNumber, myLocationData)),
+                        httpUtil.createTokenHeader());
+                return JsonUtil.parseJson(httpResponse.getResponseString(), ShareBusInfoResponse.class);
             }
-        }).subscribeOn(Schedulers.io()).observeOn(mainThread()).subscribe(new SingleObserver<Boolean>() {
+        }).subscribeOn(Schedulers.io()).observeOn(mainThread()).subscribe(new SingleObserver<ShareBusInfoResponse>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onSuccess(Boolean aBoolean) {
-                if (aBoolean) {
-                    callBack.shareInfoSuccess();
-                }
+            public void onSuccess(ShareBusInfoResponse response) {
+                callBack.shareInfoSuccess(response);
             }
 
             @Override
@@ -73,7 +77,7 @@ public class TrafficInfoInteractor {
         Single.fromCallable(new Callable<List<ShareInfo>>() {
             @Override
             public List<ShareInfo> call() throws Exception {
-                Uri uri = Uri.parse(serviceConfig.generateObtainCarInfoUrl())
+                Uri uri = Uri.parse(serviceConfig.generateObtainBusInfoUrl())
                         .buildUpon()
                         .appendQueryParameter(CAR_NUMBER_QUERY_PARAMETER, inputCarNumber)
                         .build();
@@ -98,7 +102,34 @@ public class TrafficInfoInteractor {
         });
     }
 
-    public void removeCarInfo(String sharedBusMessageUuid) {
+    public void removeSharedBusInfo(final String sharedBusInfoUuid) {
+        Single.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                Uri uri = Uri.parse(serviceConfig.generateRemoveBusInfoUrl())
+                        .buildUpon()
+                        .appendQueryParameter(UUID, sharedBusInfoUuid)
+                        .build();
+                HttpResponse httpResponse = httpUtil.get(uri.toString(), httpUtil.createTokenHeader());
+                return httpResponse.isSuccessful();
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(mainThread()).subscribe(new SingleObserver<Boolean>() {
+            @Override
+            public void onSubscribe(Disposable disposable) {
+
+            }
+
+            @Override
+            public void onSuccess(Boolean aBoolean) {
+                if (aBoolean)
+                    callBack.removeShareBusInfoSuccess();
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+        });
     }
 
 

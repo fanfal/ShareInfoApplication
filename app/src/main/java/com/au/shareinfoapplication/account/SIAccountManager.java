@@ -33,7 +33,7 @@ public class SIAccountManager {
     }
 
     public String getUserToken() {
-        return accountManager.peekAuthToken(getLoginAccount(), BuildConfig.ACCOUNT_TYPE);
+        return accountManager.peekAuthToken(getLoginAccount(), BuildConfig.ACCOUNT_TOKEN);
     }
 
     public Boolean removeAccount() {

@@ -45,6 +45,7 @@
     <string name="sign_up_failed_message">Sign up failed. User already exist.</string>
     <string name="sign_out">Sign Out</string>
     <string name="my_account">My Account</string>
+    <string name="sign_in_alert">Sorry, please sign in your account first.</string>
 
 
     <!-- Me Tab -->

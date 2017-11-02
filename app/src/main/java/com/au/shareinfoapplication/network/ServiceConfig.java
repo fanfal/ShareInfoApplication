@@ -3,12 +3,11 @@ package com.au.shareinfoapplication.network;
 
 import com.au.shareinfoapplication.model.HALBean;
 import com.au.shareinfoapplication.model.Link;
+import com.au.shareinfoapplication.utils.JsonUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.au.shareinfoapplication.utils.JsonUtil;
 
 public class ServiceConfig {
     private static final String POST_SHARE_LOCATION_INFO_KEY = "postShareLocationInfo";
@@ -16,6 +15,7 @@ public class ServiceConfig {
     private static final String USER_SIGNIN = "userLogin";
     private static final String USER_SIGNUP = "userRegister";
     private static final String USER_REFRESH_TOKEN = "refreshToken";
+    private static final String REMOVE_SHARE_LOCATION_INFO = "removeShareLocationInfo";
     private SIHttpUtil httpUtil;
     private String configUrl;
     private Map<String, String> config;
@@ -25,12 +25,12 @@ public class ServiceConfig {
         this.configUrl = configUrl;
     }
 
-    public String generateShareCarInfoUrl() throws IOException {
+    public String generateShareBusInfoUrl() throws IOException {
         initConfig();
         return config.get(POST_SHARE_LOCATION_INFO_KEY);
     }
 
-    public String generateObtainCarInfoUrl() throws IOException {
+    public String generateObtainBusInfoUrl() throws IOException {
         initConfig();
         return config.get(GET_OBTAIN_LOCATION_INFO);
     }
@@ -48,6 +48,11 @@ public class ServiceConfig {
     public String generateRefreshTokenUrl() throws IOException {
         initConfig();
         return config.get(USER_REFRESH_TOKEN);
+    }
+
+    public String generateRemoveBusInfoUrl() throws IOException {
+        initConfig();
+        return config.get(REMOVE_SHARE_LOCATION_INFO);
     }
 
 
