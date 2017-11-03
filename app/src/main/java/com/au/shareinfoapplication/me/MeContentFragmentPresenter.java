@@ -6,11 +6,11 @@ import android.support.annotation.Nullable;
 import com.au.shareinfoapplication.account.SIAccountManager;
 import com.au.shareinfoapplication.base.BasePresenter;
 
-public class MeFragmentPresenter extends BasePresenter {
+public class MeContentFragmentPresenter extends BasePresenter {
     private SIAccountManager siAccountManager;
-    private MeFragmentViewInterface view;
+    private MeContentFragmentViewInterface view;
 
-    public MeFragmentPresenter(SIAccountManager siAccountManager, MeFragmentViewInterface view) {
+    public MeContentFragmentPresenter(SIAccountManager siAccountManager, MeContentFragmentViewInterface view) {
         this.siAccountManager = siAccountManager;
         this.view = view;
     }

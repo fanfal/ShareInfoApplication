@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MeContentFragment extends BaseFragment<MeFragmentPresenter> implements MeFragmentViewInterface {
+public class MeContentFragment extends BaseFragment<MeContentFragmentPresenter> implements MeContentFragmentViewInterface {
     public static final String TAG = "MeContentFragment";
     @BindView(R.id.account_name)
     TextView textView;
@@ -44,8 +44,8 @@ public class MeContentFragment extends BaseFragment<MeFragmentPresenter> impleme
     }
 
     @Override
-    public MeFragmentPresenter getPresenter() {
-        return new MeFragmentPresenter(siAccountManager, this);
+    public MeContentFragmentPresenter getPresenter() {
+        return new MeContentFragmentPresenter(siAccountManager, this);
     }
 
     @Override

@@ -1,5 +1,5 @@
 package com.au.shareinfoapplication.me;
 
-public interface MeFragmentViewInterface {
+public interface MeContentFragmentViewInterface {
     void updateAccountName(String name);
 }
