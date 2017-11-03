@@ -1,6 +1,7 @@
 package com.au.shareinfoapplication.account;
 
 import android.accounts.Account;
+import android.accounts.AccountManagerCallback;
 
 import com.au.shareinfoapplication.BuildConfig;
 import com.au.shareinfoapplication.account.model.SIAccount;
@@ -36,13 +37,11 @@ public class SIAccountManager {
         return accountManager.peekAuthToken(getLoginAccount(), BuildConfig.ACCOUNT_TOKEN);
     }
 
-    public Boolean removeAccount() {
+    public void removeAccount(AccountManagerCallback<Boolean> callback) {
         Account account = getLoginAccount();
         if (account != null) {
-            accountManager.removeAccount(account, null, null);
-            return true;
+            accountManager.removeAccount(account, callback, null);
         }
-        return false;
     }
 
     private Account getLoginAccount() {

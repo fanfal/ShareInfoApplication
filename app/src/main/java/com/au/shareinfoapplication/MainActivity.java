@@ -16,10 +16,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.au.shareinfoapplication.account.SIAccountManager;
+import com.au.shareinfoapplication.me.MeContentFragment;
 import com.au.shareinfoapplication.me.MeFragment;
 import com.au.shareinfoapplication.signin.AuthenticationActivity;
 import com.au.shareinfoapplication.traffic.BaseMapFragment;
-import com.au.shareinfoapplication.widget.SIDialogFragment;
 
 import javax.inject.Inject;
 
@@ -142,13 +142,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void onNavMeTabClicked() {
-        if (!siAccountManager.isUserLogin()) {
-            new SIDialogFragment.Builder(this)
-                    .setMessage(R.string.user_not_sign_in)
-                    .setPositiveButton(R.string.close, null)
-                    .show(getSupportFragmentManager());
-        } else {
-            replaceFragment(new MeFragment());
-        }
+        replaceFragment(new MeFragment());
     }
 }

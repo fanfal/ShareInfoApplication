@@ -31,8 +31,8 @@
     <string name="user_not_sign_in">Please sign in you account first.</string>
 
     <!-- Authentication -->
-    <string name="sign_in_title">SignIn</string>
-    <string name="sign_up_title">SignUp</string>
+    <string name="sign_in_title">Sign In</string>
+    <string name="sign_up_title">Sign Up</string>
     <string name="phone_num">PhoneNumber:</string>
     <string name="password">Password:</string>
     <string name="sign_up_link">No account yet? Create one</string>
@@ -45,7 +45,8 @@
     <string name="sign_up_failed_message">Sign up failed. User already exist.</string>
     <string name="sign_out">Sign Out</string>
     <string name="my_account">My Account</string>
-    <string name="sign_in_alert">Sorry, please sign in your account first.</string>
+    <string name="need_sign_in__dialog_alert">Sorry, please sign in your account first.</string>
+    <string name="need_sign_in_fragment_alert">This function do need your sign in first, please take a few second to sign in our app.</string>
 
 
     <!-- Me Tab -->

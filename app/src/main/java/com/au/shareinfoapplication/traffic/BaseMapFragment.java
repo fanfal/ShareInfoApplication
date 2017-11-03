@@ -195,8 +195,10 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     public void toggleShareBusInfoView() {
         if (shareInfoOperationView.getVisibility() == View.VISIBLE) {
             hideShareBusInfoView();
+            operateButton.setSelected(false);
         } else {
             showShareBusInfoView();
+            operateButton.setSelected(true);
         }
     }
 
@@ -244,7 +246,7 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
     public void showUserShouldLoginAlertDialog() {
         new SIDialogFragment.Builder(getActivity())
                 .setTitle(R.string.error_title)
-                .setMessage(R.string.sign_in_alert)
+                .setMessage(R.string.need_sign_in__dialog_alert)
                 .setPositiveButton(R.string.close, null)
                 .show(getActivity().getSupportFragmentManager());
     }

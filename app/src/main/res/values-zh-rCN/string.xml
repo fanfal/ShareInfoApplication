@@ -38,7 +38,9 @@
     <string name="sign_up_failed_message">注册失败，该用户已存在。</string>
     <string name="sign_out">退 出</string>
     <string name="my_account">我的账户</string>
-    <string name="sign_in_alert">对不起，请先登录您的账户。</string>
+    <string name="need_sign_in__dialog_alert">对不起，请先登录您的账户。</string>
+    <string name="need_sign_in_fragment_alert">该功能需要您的账号，请花几秒钟时间登录我们的应用。</string>
+
 
 
     <!-- Me Tab -->

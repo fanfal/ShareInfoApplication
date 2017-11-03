@@ -31,6 +31,7 @@ public class SignUpInteractor {
     }
 
     public void signUp(final String phoneNum, final String password) {
+        signUpView.showProgressBar();
         Single.fromCallable(new Callable<HttpResponse>() {
             @Override
             public HttpResponse call() throws Exception {
@@ -47,6 +48,7 @@ public class SignUpInteractor {
 
             @Override
             public void onSuccess(HttpResponse httpResponse) {
+                signUpView.hideProgressBar();
                 if (httpResponse.isSuccessful()) {
                     String token = JsonUtil.parseJson(httpResponse.getResponseString(), SignUpResponse.class).getToken();
                     SIAccount siAccount = new SIAccount.Builder()
@@ -61,6 +63,7 @@ public class SignUpInteractor {
 
             @Override
             public void onError(Throwable e) {
+                signUpView.hideProgressBar();
                 signUpView.signUpError();
             }
         });
