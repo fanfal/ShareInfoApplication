@@ -61,7 +61,6 @@
         <activity
             android:name=".signin.AuthenticationActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
 
         </activity>
