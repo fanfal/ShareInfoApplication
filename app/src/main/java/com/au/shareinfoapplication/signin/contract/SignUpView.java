@@ -6,7 +6,7 @@ import com.au.shareinfoapplication.account.model.SIAccount;
 public interface SignUpView extends BaseAuthenticationView {
     void signUpError();
 
-    void signUpFailed();
+    void signUpFailed(String message);
 
     void signUpSuccess(SIAccount account);
 }

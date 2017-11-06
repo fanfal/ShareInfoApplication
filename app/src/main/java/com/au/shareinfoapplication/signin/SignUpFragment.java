@@ -108,10 +108,10 @@ public class SignUpFragment extends Fragment implements SignUpView {
     }
 
     @Override
-    public void signUpFailed() {
+    public void signUpFailed(String message) {
         new SIDialogFragment.Builder(getContext())
                 .setTitle(R.string.failed_title)
-                .setMessage(R.string.sign_in_failed_message)
+                .setMessage(message)
                 .setPositiveButton(R.string.close, null)
                 .show(getFragmentManager());
 

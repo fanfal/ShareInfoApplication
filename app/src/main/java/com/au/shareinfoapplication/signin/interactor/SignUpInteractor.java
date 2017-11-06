@@ -57,7 +57,7 @@ public class SignUpInteractor {
                             .setToken(token).build();
                     signUpView.signUpSuccess(siAccount);
                 } else {
-                    signUpView.signUpFailed();
+                    signUpView.signUpFailed(httpResponse.getResponseString());
                 }
             }
 
