@@ -16,7 +16,7 @@
     <string name="ok">OK</string>
 
     <!-- Service Config -->
-    <string name="service_config_url" translatable="false">http://10.0.2.2:8080/configuration/urls</string>
+    <string name="service_config_url" translatable="false">https://share-future.herokuapp.com/configuration/urls</string>
 
     <!-- Map Fragment -->
     <string name="traffic_info_button">Share/Obtain</string>
