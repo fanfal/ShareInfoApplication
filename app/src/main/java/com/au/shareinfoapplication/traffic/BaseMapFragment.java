@@ -181,7 +181,9 @@ public class BaseMapFragment extends BaseFragment<BasePresenter> implements Traf
             Toast.makeText(getContext(), getString(R.string.no_traffic_info_message), Toast.LENGTH_SHORT).show();
             return;
         }
+        baiduMap.clear();
         baiduMap.addOverlays(createTrafficInfoOverlay(shareInfos));
+        toggleShareBusInfoView();
     }
 
     @Override
